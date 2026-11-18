@@ -310,6 +310,11 @@ function App() {
   }, [savingsGoal]);
   useEffect(() => {
   const checkLogin = async () => {
+    if (new URLSearchParams(window.location.search).get('demo') === '1') {
+      setUser({ id: 0, name: 'Demo User', email: 'demo@finsight.local' });
+      setAuthLoading(false);
+      return;
+    }
     try {
       const response = await fetch(`${API_URL}/api/auth/me`, {
         method: 'GET',
